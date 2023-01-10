@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Comprar ahora</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" th:href="@{/styles/pagostyle.css}">
+<link rel="stylesheet" th:href="@{/styles/styles.css}">
+</head>
+<body>
+	<header th:replace="fragments/navBar.html :: nav"></header>
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-11">
+				<div class="card card0 rounded-0">
+					<div class="row">
+						<div class="col-md-5 d-md-block d-none p-0 box">
+							<div class="card rounded-0 border-0 card1" id="bill">
+								<h3>Comprar ahora</h3>
+								<hr />
+								<div class="row">
+									<ul th:each="producto : ${session.carritoProd}">
+										<li
+											th:text="${producto.nombre} +' / ' + ${producto.cantidadAComprar} + ' unidades'"></li>
+									</ul>
+								</div>
+								<div class="row">
+									<div class="col-md-12 red-bg">
+										<p class="bill-date" id="total-label">Precio total</p>
+										<h2 class="bill-head" id="total"
+											th:text="${#numbers.formatCurrency(precioTotal)}"></h2>
+										<small class="bill-date" id="total-label">Impuestos
+											incluídos</small>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-7 col-sm-12 p-0 box">
+							<div class="card rounded-0 border-0 card2" id="paypage">
+								<h3>Enviar a</h3>
+								<hr />
+								<div class="form-card">
+									<label class="pay">Dirección</label> <input type="text"
+										name="direccion" placeholder="Dirección"
+										th:value="${session.userSession.direccion}">
+									<div class="row">
+										<div class="col-md-12">
+											<label class="pay">Provincia</label>
+										</div>
+										<div class="col-md-12">
+											<input type="text" name="provincia" placeholder="Provincia"
+												th:value="${session.userSession.provincia}">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<label class="pay">Localidad</label>
+										</div>
+										<div class="col-md-12">
+											<input type="text" name="localidad" placeholder="Localidad"
+												th:value="${session.userSession.localidad}">
+										</div>
+									</div>
+
+									<h2 id="heading2" class="text-danger">Pagar con</h2>
+									<div class="radio-group">
+										<div class='radio' data-value="credit"
+											th:each="metodoPago : ${listaMetodosPago}">
+											<a
+												th:href="@{/catalogo/confirmarPago/(metodo=${metodoPago.metodo_pago},total=${precioTotal})}"><img
+												th:src="${metodoPago.icono}" width="200px" height="60px" /></a>
+										</div>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

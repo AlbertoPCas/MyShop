@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" th:href="@{/styles/styles.css}">
+</head>
+<body>
+	<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark"
+		th:fragment="navBar">
+		<div class="container px-4 px-lg-5">
+			<a class="navbar-brand" href="/catalogo/inicio">AlberShop</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="/catalogo/inicio">Inicio</a></li>
+				</ul>
+				<form class="d-flex" action="/catalogo/verCarrito"
+					th:if="${session.userSession.id_rol <= 2}">
+					<button class="btn btn-outline-light" type="submit">
+						<i class="bi-cart-fill me-1"></i> Carrito <span
+							class="badge bg-light text-black ms-1 rounded-pill"
+							th:text="${#lists.size(session.carritoProd)}"></span>
+					</button>
+				</form>
+				<form>
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4"
+						th:if="${session.userSession.id_rol == 1}">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/login">Entrar</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/registro">Registro</a></li>
+					</ul>
+
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4"
+						th:if="${session.userSession.id_rol > 1}">
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false"
+							th:text="${session.userSession.email}"></a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li th:each="opcion : ${session.listaOpciones}"><a
+									class="dropdown-item" th:href="${opcion.url_opcion}"
+									th:text="${opcion.nombre_opcion}"></a></li>
+							</ul></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</nav>
+</body>
+</html>
