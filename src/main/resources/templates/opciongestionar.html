@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Gestiones</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+	integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+	integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+<script src="scripts/script.js"></script>
+</head>
+<body>
+	<header th:replace="fragments/navBar.html :: nav"></header>
+
+	<th:block th:if="${gestion == 'productos'}">
+		<th:block th:if="${opcion == 'alta'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<form action="/gestionar/insertarProducto" method="post">
+										<h3>Alta producto</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<select class="form-select form-select-lg p-r-20"
+														aria-label=".form-select-lg example" name="categoria">
+														<option value="">Categoría</option>
+														<option th:each="categoria : ${session.listaCategorias}"
+															th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="text" name="inputNombre"
+														class="form-control form-control-lg"
+														placeholder="Nombre del producto" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="text" name="inputDescripcion"
+														class="form-control form-control-lg"
+														placeholder="Descripción del producto" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text" name="inputPrecio"
+														class="form-control form-control-lg" placeholder="Precio" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text" name="inputStock"
+														class="form-control form-control-lg" placeholder="Stock" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text" name="inputImpuesto"
+														class="form-control form-control-lg"
+														placeholder="Impuesto" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<div class="form-outline">
+														<input type="text" name="inputImagen"
+															class="form-control form-control-lg" placeholder="Imagen" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Insertar producto" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+
+		<th:block th:if="${opcion == 'baja'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<form action="/gestionar/bajaProducto">
+										<h3 style="margin-bottom: 50px; margin-top: -20px;">Dar
+											de baja un producto</h3>
+										<h4>Introduce el ID del producto</h4>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="text" name="id"
+														class="form-control form-control-lg"
+														placeholder="ID del producto" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Dar de baja" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+
+		<th:block th:if="${opcion == 'actualizacion'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<form id="recuperarProducto"
+										action="/gestionar/recuperarProducto">
+										<input type="hidden" name="gestion" value="productos">
+										<input type="hidden" name="opcion" value="actualizacion">
+										<input type="hidden" name="id" id="idEnviar" value="">
+									</form>
+									<form action="/gestionar/actualizarProducto" method="post">
+										<h3>Actualizar producto</h3>
+										<div class="row">
+											<div class="d-flex flex-row-reverse"
+												style="margin-bottom: 30px;">
+												<input class="btn btn-primary btn-lg" type="button"
+													value="Recuperar" style="margin-left: 5px;"
+													onclick="recuperarProductoMetodo()" /> <input type="text"
+													id="inputID" name="inputID"
+													class="form-control form-control-lg"
+													placeholder="ID del producto"
+													th:value="${producto.id == 0} ? '' : ${producto.id}" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<select class="form-select form-select-lg p-r-20"
+														aria-label=".form-select-lg example" name="categoria">
+														<option value="">Categoría</option>
+														<option th:each="categoria : ${session.listaCategorias}"
+															th:value="${categoria.id}" th:text="${categoria.nombre}"
+															th:selected="${producto.id_categoria} == ${categoria.id}"></option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="text" name="inputNombre"
+														class="form-control form-control-lg"
+														placeholder="Nombre del producto"
+														th:value="${producto.nombre}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="text" name="inputDescripcion"
+														class="form-control form-control-lg"
+														placeholder="Descripción del producto"
+														th:value="${producto.descripcion}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text" name="inputPrecio"
+														class="form-control form-control-lg" placeholder="Precio"
+														th:value="${producto.precio == 0} ? '' : ${producto.precio}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text" name="inputStock"
+														class="form-control form-control-lg" placeholder="Stock"
+														th:value="${producto.stock == 0} ? '' : ${producto.stock}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text" name="inputImpuesto"
+														class="form-control form-control-lg"
+														placeholder="Impuesto"
+														th:value="${producto.impuesto == 0} ? '' : ${producto.impuesto}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<div class="form-outline">
+														<input type="text" name="inputImagen"
+															class="form-control form-control-lg" placeholder="Imagen"
+															th:value="${producto.imagen}" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Actualizar producto" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+
+		<th:block th:if="${opcion == 'eliminacion'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<form action="/gestionar/eliminarProducto">
+										<h3 style="margin-bottom: 50px; margin-top: -20px;">Eliminar
+											un producto</h3>
+										<h4>Introduce el ID del producto</h4>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="text" name="id"
+														class="form-control form-control-lg"
+														placeholder="ID del producto" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Eliminar" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+	</th:block>
+
+	<th:block th:if="${gestion == 'clientes'}">
+		<th:block th:if="${opcion == 'alta'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<label th:text="${mensaje}" style="margin-bottom: 20px;"></label>
+									<form action="/gestionar/altaCliente" method="post">
+										<h2 style="margin-bottom: 20px;">Alta cliente</h2>
+										<h3>Datos de usuario *</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="email"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTEMAIL}"
+														class="form-control form-control-lg"
+														placeholder="Correo electrónico" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="password"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPASS}"
+														class="form-control form-control-lg"
+														placeholder="Contraseña" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="password"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPASS2}"
+														class="form-control form-control-lg"
+														placeholder="Repita su contraseña" />
+												</div>
+											</div>
+										</div>
+
+
+										<h3>Datos personales *</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTNOMBRE}"
+														class="form-control form-control-lg" placeholder="Nombre" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTAPELLIDO1}"
+														class="form-control form-control-lg"
+														placeholder="Primer apellido" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTAPELLIDO2}"
+														class="form-control form-control-lg"
+														placeholder="Segundo apellido" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTTELEFONO}"
+														class="form-control form-control-lg"
+														placeholder="Teléfono" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTDNI}"
+														class="form-control form-control-lg" placeholder="DNI" />
+												</div>
+											</div>
+										</div>
+
+										<h3>Datos de envío (opcionales)</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTDIRECCION}"
+														class="form-control form-control-lg"
+														placeholder="Dirección" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPROVINCIA}"
+														class="form-control form-control-lg"
+														placeholder="Provincia" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTLOCALIDAD}"
+														class="form-control form-control-lg"
+														placeholder="Localidad" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Registrar" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+
+		<th:block th:if="${opcion == 'baja'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<form action="/gestionar/bajaCliente">
+										<h3 style="margin-bottom: 50px; margin-top: -20px;">Dar
+											de baja un cliente</h3>
+										<h4>Introduce el ID del cliente</h4>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="text" name="id"
+														class="form-control form-control-lg"
+														placeholder="ID del cliente" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Dar de baja" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+
+		<th:block th:if="${opcion == 'actualizacion'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<label th:text="${mensaje}" style="margin-bottom: 20px;"></label>
+									<form id="recuperarEmpleado"
+										action="/gestionar/recuperarEmpleado">
+										<input type="hidden" name="gestion" value="productos">
+										<input type="hidden" name="opcion" value="actualizacion">
+										<input type="hidden" name="id" id="idEnviar" value="">
+									</form>
+									<form action="/gestionar/actualizarEmpleado" method="post">
+										<h2 style="margin-bottom: 20px;">Actualizar empleado</h2>
+										<div class="row">
+											<div class="d-flex flex-row-reverse"
+												style="margin-bottom: 30px;">
+												<input class="btn btn-primary btn-lg" type="button"
+													value="Recuperar" style="margin-left: 5px;"
+													onclick="recuperarEmpleadoMetodo()" /> <input type="text"
+													id="inputID" name="inputID"
+													class="form-control form-control-lg"
+													placeholder="ID del empleado"
+													th:value="${usuario.id == 0} ? '' : ${usuario.id}" />
+											</div>
+										</div>
+										<h3>Datos de usuario *</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="email"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTEMAIL}"
+														class="form-control form-control-lg"
+														placeholder="Correo electrónico"
+														th:value="${usuario.email}" />
+												</div>
+											</div>
+										</div>
+										<h3>Datos personales *</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTNOMBRE}"
+														class="form-control form-control-lg" placeholder="Nombre"
+														th:value="${usuario.nombre}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTAPELLIDO1}"
+														class="form-control form-control-lg"
+														placeholder="Primer apellido"
+														th:value="${usuario.apellido1}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTAPELLIDO2}"
+														class="form-control form-control-lg"
+														placeholder="Segundo apellido"
+														th:value="${usuario.apellido2}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTTELEFONO}"
+														class="form-control form-control-lg"
+														placeholder="Teléfono" th:value="${usuario.telefono}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTDNI}"
+														class="form-control form-control-lg" placeholder="DNI"
+														th:value="${usuario.dni}" />
+												</div>
+											</div>
+										</div>
+
+										<h3>Datos de envío (opcionales)</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTDIRECCION}"
+														class="form-control form-control-lg"
+														placeholder="Dirección" th:value="${usuario.direccion}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPROVINCIA}"
+														class="form-control form-control-lg"
+														placeholder="Provincia" th:value="${usuario.provincia}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTLOCALIDAD}"
+														class="form-control form-control-lg"
+														placeholder="Localidad" th:value="${usuario.localidad}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Actualizar" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+
+		<th:block th:if="${opcion == 'eliminacion'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<form action="/gestionar/eliminarCliente">
+										<h3 style="margin-bottom: 50px; margin-top: -20px;">Eliminar
+											un cliente</h3>
+										<h4>Introduce el ID del cliente</h4>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="text" name="id"
+														class="form-control form-control-lg"
+														placeholder="ID del cliente" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Eliminar" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+	</th:block>
+
+	<th:block th:if="${gestion == 'empleados'}">
+		<th:block th:if="${opcion == 'alta'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<label th:text="${mensaje}" style="margin-bottom: 20px;"></label>
+									<form action="/gestionar/altaEmpleado" method="post">
+										<h2 style="margin-bottom: 20px;">Alta empleado</h2>
+										<h3>Datos de usuario *</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="email"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTEMAIL}"
+														class="form-control form-control-lg"
+														placeholder="Correo electrónico" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="password"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPASS}"
+														class="form-control form-control-lg"
+														placeholder="Contraseña" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="password"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPASS2}"
+														class="form-control form-control-lg"
+														placeholder="Repita su contraseña" />
+												</div>
+											</div>
+										</div>
+
+
+										<h3>Datos personales *</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTNOMBRE}"
+														class="form-control form-control-lg" placeholder="Nombre" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTAPELLIDO1}"
+														class="form-control form-control-lg"
+														placeholder="Primer apellido" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTAPELLIDO2}"
+														class="form-control form-control-lg"
+														placeholder="Segundo apellido" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTTELEFONO}"
+														class="form-control form-control-lg"
+														placeholder="Teléfono" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTDNI}"
+														class="form-control form-control-lg" placeholder="DNI" />
+												</div>
+											</div>
+										</div>
+
+										<h3>Datos de envío (opcionales)</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTDIRECCION}"
+														class="form-control form-control-lg"
+														placeholder="Dirección" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPROVINCIA}"
+														class="form-control form-control-lg"
+														placeholder="Provincia" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTLOCALIDAD}"
+														class="form-control form-control-lg"
+														placeholder="Localidad" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Registrar" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+
+		<th:block th:if="${opcion == 'baja'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<form action="/gestionar/bajaEmpleado">
+										<h3 style="margin-bottom: 50px; margin-top: -20px;">Dar
+											de baja un empleado</h3>
+										<h4>Introduce el ID del empleado</h4>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="text" name="id"
+														class="form-control form-control-lg"
+														placeholder="ID del empleado" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Dar de baja" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+
+		<th:block th:if="${opcion == 'actualizacion'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<label th:text="${mensaje}" style="margin-bottom: 20px;"></label>
+									<form id="recuperarCliente"
+										action="/gestionar/recuperarCliente">
+										<input type="hidden" name="gestion" value="productos">
+										<input type="hidden" name="opcion" value="actualizacion">
+										<input type="hidden" name="id" id="idEnviar" value="">
+									</form>
+									<form action="/gestionar/actualizarCliente" method="post">
+										<h2 style="margin-bottom: 20px;">Actualizar cliente</h2>
+										<div class="row">
+											<div class="d-flex flex-row-reverse"
+												style="margin-bottom: 30px;">
+												<input class="btn btn-primary btn-lg" type="button"
+													value="Recuperar" style="margin-left: 5px;"
+													onclick="recuperarClienteMetodo()" /> <input type="text"
+													id="inputID" name="inputID"
+													class="form-control form-control-lg"
+													placeholder="ID del empleado"
+													th:value="${usuario.id == 0} ? '' : ${usuario.id}" />
+											</div>
+										</div>
+										<h3>Datos de usuario *</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="email"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTEMAIL}"
+														class="form-control form-control-lg"
+														placeholder="Correo electrónico"
+														th:value="${usuario.email}" />
+												</div>
+											</div>
+										</div>
+										<h3>Datos personales *</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTNOMBRE}"
+														class="form-control form-control-lg" placeholder="Nombre"
+														th:value="${usuario.nombre}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTAPELLIDO1}"
+														class="form-control form-control-lg"
+														placeholder="Primer apellido"
+														th:value="${usuario.apellido1}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTAPELLIDO2}"
+														class="form-control form-control-lg"
+														placeholder="Segundo apellido"
+														th:value="${usuario.apellido2}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTTELEFONO}"
+														class="form-control form-control-lg"
+														placeholder="Teléfono" th:value="${usuario.telefono}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTDNI}"
+														class="form-control form-control-lg" placeholder="DNI"
+														th:value="${usuario.dni}" />
+												</div>
+											</div>
+										</div>
+
+										<h3>Datos de envío (opcionales)</h3>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTDIRECCION}"
+														class="form-control form-control-lg"
+														placeholder="Dirección" th:value="${usuario.direccion}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPROVINCIA}"
+														class="form-control form-control-lg"
+														placeholder="Provincia" th:value="${usuario.provincia}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="form-outline">
+													<input type="text"
+														th:name="${T(com.tienda.demo.utils.PathConstants).INPUTLOCALIDAD}"
+														class="form-control form-control-lg"
+														placeholder="Localidad" th:value="${usuario.localidad}" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Actualizar" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+
+		<th:block th:if="${opcion == 'eliminacion'}">
+			<section class="vh-100 gradient-custom">
+				<div class="container py-5 h-100">
+					<div class="row justify-content-center align-items-center h-100">
+						<div class="col-12 col-lg-9 col-xl-7">
+							<div class="card shadow-2-strong card-registration"
+								style="border-radius: 15px;">
+								<div class="card-body p-4 p-md-5">
+									<form action="/gestionar/eliminarEmpleado">
+										<h3 style="margin-bottom: 50px; margin-top: -20px;">Eliminar
+											un empleado</h3>
+										<h4>Introduce el ID del empleado</h4>
+										<div class="row">
+											<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+												<div class="form-outline">
+													<input type="text" name="id"
+														class="form-control form-control-lg"
+														placeholder="ID del cliente" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<div class="mt-4 pt-2">
+													<input class="btn btn-primary btn-lg" type="submit"
+														value="Eliminar" />
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</th:block>
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registro</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+
+<link rel="stylesheet" th:href="@{/styles/styles.css}">
+</head>
+<body>
+	<header th:replace="fragments/navBar.html :: nav"></header>
+
+	<section class="vh-100 gradient-custom">
+		<div class="container py-5 h-100">
+			<div class="row justify-content-center align-items-center h-100">
+				<div class="col-12 col-lg-9 col-xl-7">
+					<div class="card shadow-2-strong card-registration"
+						style="border-radius: 15px;">
+						<div class="card-body p-4 p-md-5">
+							<label th:text="${mensaje}" style="margin-bottom: 20px;"></label>
+							<form action="/registroUser" method="post">
+								<h3>Datos de usuario *</h3>
+								<div class="row">
+									<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+										<div class="form-outline">
+											<input type="email"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTEMAIL}"
+												class="form-control form-control-lg"
+												placeholder="Correo electrónico" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+										<div class="form-outline">
+											<input type="password"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPASS}"
+												class="form-control form-control-lg"
+												placeholder="Contraseña" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 mb-4" style="margin-bottom: 30px;">
+										<div class="form-outline">
+											<input type="password"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPASS2}"
+												class="form-control form-control-lg"
+												placeholder="Repita su contraseña" />
+										</div>
+									</div>
+								</div>
+
+
+								<h3>Datos personales *</h3>
+								<div class="row">
+									<div class="col-md-12 mb-4">
+										<div class="form-outline">
+											<input type="text"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTNOMBRE}"
+												class="form-control form-control-lg" placeholder="Nombre" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 mb-4">
+										<div class="form-outline">
+											<input type="text"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTAPELLIDO1}"
+												class="form-control form-control-lg"
+												placeholder="Primer apellido" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 mb-4">
+										<div class="form-outline">
+											<input type="text"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTAPELLIDO2}"
+												class="form-control form-control-lg"
+												placeholder="Segundo apellido" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 mb-4">
+										<div class="form-outline">
+											<input type="text"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTTELEFONO}"
+												class="form-control form-control-lg" placeholder="Teléfono" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 mb-4">
+										<div class="form-outline">
+											<input type="text"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTDNI}"
+												class="form-control form-control-lg" placeholder="DNI" />
+										</div>
+									</div>
+								</div>
+
+								<h3>Datos de envío (opcionales)</h3>
+								<div class="row">
+									<div class="col-md-12 mb-4">
+										<div class="form-outline">
+											<input type="text"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTDIRECCION}"
+												class="form-control form-control-lg" placeholder="Dirección" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 mb-4">
+										<div class="form-outline">
+											<input type="text"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTPROVINCIA}"
+												class="form-control form-control-lg" placeholder="Provincia" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 mb-4">
+										<div class="form-outline">
+											<input type="text"
+												th:name="${T(com.tienda.demo.utils.PathConstants).INPUTLOCALIDAD}"
+												class="form-control form-control-lg" placeholder="Localidad" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<div class="mt-4 pt-2">
+											<input class="btn btn-primary btn-lg" type="submit"
+												value="Registrar" />
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- <footer th:replace="fragments/footer.html :: footer"> 
+	</footer> -->
+</body>
+</html>

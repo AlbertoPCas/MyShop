@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tu perfil</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet" th:href="@{/styles/perfilstyle.css}">
+<link rel="stylesheet" th:href="@{/styles/styles.css}">
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+	<header th:replace="fragments/navBar.html :: nav"></header>
+
+	<div class="container rounded bg-white mt-5 mb-5">
+		<div class="row">
+			<div class="col-md-3 border-right">
+				<div
+					class="d-flex flex-column align-items-center text-center p-3 py-5">
+					<img class="rounded-circle mt-5" width="150px"
+						src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+						class="font-weight-bold" th:text="${session.userSession.nombre}"></span><span
+						class="text-black-50" th:text="${session.userSession.email}"></span><span>
+					</span>
+				</div>
+			</div>
+			<div class="col-md-5 border-right">
+				<div class="p-3 py-5" style="margin-top: -40px;">
+					<div class="d-flex justify-content-between align-items-center mb-3">
+						<h4 class="text-right">Datos de usuario</h4>
+					</div>
+					<div class="row mt-3">
+						<div class="col-md-12">
+							<label class="labels">Correo electrónico</label><input
+								type="text" class="form-control"
+								placeholder="Correo electrónico"
+								th:value="${session.userSession.email}">
+						</div>
+						<div class="col-md-12">
+							<label class="labels">Contraseña</label><input type="text"
+								class="form-control" placeholder="Contraseña" value="">
+						</div>
+						<div class="col-md-12">
+							<label class="labels">Repetir contraseña</label><input
+								type="text" class="form-control"
+								placeholder="Repetir contraseña" value="">
+						</div>
+						<div
+							class="d-flex justify-content-between align-items-center mb-3">
+							<h4 class="text-right"
+								style="margin-top: 20px; margin-bottom: -10px;">Datos
+								personales</h4>
+						</div>
+						<div class="col-md-12">
+							<label class="labels">Nombre</label><input type="text"
+								class="form-control" placeholder="Nombre"
+								th:value="${session.userSession.nombre}">
+						</div>
+						<div class="col-md-12">
+							<label class="labels">Primer apellido</label><input type="text"
+								class="form-control" placeholder="Primer apellido"
+								th:value="${session.userSession.apellido1}">
+						</div>
+						<div class="col-md-12">
+							<label class="labels">Segundo apellido</label><input type="text"
+								class="form-control" placeholder="Segundo apellido"
+								th:value="${session.userSession.apellido2}">
+						</div>
+						<div class="col-md-12">
+							<label class="labels">Teléfono</label><input type="text"
+								class="form-control" placeholder="Teléfono"
+								th:value="${session.userSession.telefono}">
+						</div>
+						<div class="col-md-12">
+							<label class="labels">DNI</label><input type="text"
+								class="form-control" placeholder="DNI"
+								th:value="${session.userSession.dni}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="p-3 py-5" style="margin-top: -40px;">
+					<div class="d-flex justify-content-between align-items-center mb-3">
+						<h4 class="text-right">Datos de envío</h4>
+					</div>
+					<div class="col-md-12">
+						<label class="labels">Dirección</label><input type="text"
+							class="form-control" placeholder="Dirección"
+							th:value="${session.userSession.direccion}">
+					</div>
+					<div class="col-md-12">
+						<label class="labels">Provincia</label><input type="text"
+							class="form-control" placeholder="Provincia"
+							th:value="${session.userSession.provincia}">
+					</div>
+					<div class="col-md-12">
+						<label class="labels">Localidad</label><input type="text"
+							class="form-control" placeholder="Localidad"
+							th:value="${session.userSession.localidad}">
+					</div>
+					<div class="mt-5 text-center">
+						<button class="btn btn-primary profile-button" type="button">Actualizar
+							perfil</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
